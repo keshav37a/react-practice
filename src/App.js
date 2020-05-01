@@ -1,11 +1,13 @@
 import React from 'react';
+import Cartitem from './CartItem'
 
 function App() {
   return (
     <div>
-      <h1>Cart</h1>
+      <Cartitem/>
     </div>
   );
 }
+
 
 export default App;
