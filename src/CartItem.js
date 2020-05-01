@@ -40,7 +40,7 @@ class CartItem extends React.Component{
     }
 
     render(){
-        const {title, price, quantity, img} = this.state;
+        const {title, price, quantity, img} = this.props.product;
         return (
             <div className="cart-item">
                 <div className="left-block">
