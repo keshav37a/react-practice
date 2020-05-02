@@ -24,7 +24,7 @@ class CartItem extends React.Component{
                 quantity: prevState.quantity+1
             });
         }, ()=>{
-            console.log('state: ', this.state.quantity);
+            // console.log('state: ', this.state.quantity);
         });
         
     }
@@ -35,11 +35,12 @@ class CartItem extends React.Component{
         }
         else
             this.setState({quantity: this.state.quantity-1}, ()=>{
-                console.log('state: ', this.state.quantity);
+                // console.log('state: ', this.state.quantity);
             });
     }
 
     render(){
+        // console.log(this.props);
         const {title, price, quantity, img} = this.props.product;
         return (
             <div className="cart-item">
@@ -54,9 +55,9 @@ class CartItem extends React.Component{
 
                     <div className="cart-item-actions">
 
-                        <img alt="increase-quantity" src="https://image.flaticon.com/icons/svg/1828/1828926.svg" className="action-icons" onClick={this.increaseQty}></img>
+                        <img alt="increase-quantity" src="https://image.flaticon.com/icons/svg/1828/1828926.svg" className="action-icons" onClick={()=>{this.props.handleIncreaseQty(this.props.product)}} ></img>
 
-                        <img alt="decrease-quantity" src="https://image.flaticon.com/icons/svg/1828/1828906.svg" className="action-icons" onClick={this.decreaseQty}></img>
+                        <img alt="decrease-quantity" src="https://image.flaticon.com/icons/svg/1828/1828906.svg" className="action-icons" onClick={()=>{this.props.handleDecreaseQty(this.props.product)}} ></img>
 
                         <img alt="remove-item" src="https://image.flaticon.com/icons/svg/1214/1214428.svg" className="action-icons"></img>
 
