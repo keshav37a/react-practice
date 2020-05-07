@@ -1,43 +1,44 @@
 import React from 'react';
 
 class CartItem extends React.Component{
+    // eslint-disable-next-line no-useless-constructor
     constructor(){
         super();
-        this.state = {
-            title: 'Roasted Chicken',
-            price: 500,
-            quantity: 1,
-            img: ''
-        }
+        // this.state = {
+        //     title: 'Roasted Chicken',
+        //     price: 500,
+        //     quantity: 1,
+        //     img: ''
+        // }
     }
 
-    increaseQty = ()=>{
-        // Set state form 1
-        // this.setState({quantity: this.state.quantity+1}, ()=>{
-        //     console.log('state: ', this.state.quantity);
-        // });
+    // increaseQty = ()=>{
+    //     // Set state form 1
+    //     // this.setState({quantity: this.state.quantity+1}, ()=>{
+    //     //     console.log('state: ', this.state.quantity);
+    //     // });
 
         
-        // Set State form2- If PrevState Req use this
-        this.setState((prevState)=>{
-            return({
-                quantity: prevState.quantity+1
-            });
-        }, ()=>{
-            // console.log('state: ', this.state.quantity);
-        });
+    //     // Set State form2- If PrevState Req use this
+    //     this.setState((prevState)=>{
+    //         return({
+    //             quantity: prevState.quantity+1
+    //         });
+    //     }, ()=>{
+    //         // console.log('state: ', this.state.quantity);
+    //     });
         
-    }
+    // }
 
-    decreaseQty = ()=>{
-        if(this.state.quantity<=1){
-            return;                    
-        }
-        else
-            this.setState({quantity: this.state.quantity-1}, ()=>{
-                // console.log('state: ', this.state.quantity);
-            });
-    }
+    // decreaseQty = ()=>{
+    //     if(this.state.quantity<=1){
+    //         return;                    
+    //     }
+    //     else
+    //         this.setState({quantity: this.state.quantity-1}, ()=>{
+    //             // console.log('state: ', this.state.quantity);
+    //         });
+    // }
 
     render(){
         // console.log(this.props);
@@ -55,11 +56,23 @@ class CartItem extends React.Component{
 
                     <div className="cart-item-actions">
 
-                        <img alt="increase-quantity" src="https://image.flaticon.com/icons/svg/1828/1828926.svg" className="action-icons" onClick={()=>{this.props.handleIncreaseQty(this.props.product)}} ></img>
+                        <img alt="increase-quantity" 
+                             src="https://image.flaticon.com/icons/svg/1828/1828926.svg" 
+                             className="action-icons" 
+                             onClick={()=>{this.props.handleIncreaseQty(this.props.product)}} >
+                        </img>
 
-                        <img alt="decrease-quantity" src="https://image.flaticon.com/icons/svg/1828/1828906.svg" className="action-icons" onClick={()=>{this.props.handleDecreaseQty(this.props.product)}} ></img>
+                        <img alt="decrease-quantity" 
+                             src="https://image.flaticon.com/icons/svg/1828/1828906.svg" 
+                             className="action-icons" 
+                             onClick={()=>{this.props.handleDecreaseQty(this.props.product)}} >
+                        </img>
 
-                        <img alt="remove-item" src="https://image.flaticon.com/icons/svg/1214/1214428.svg" className="action-icons"></img>
+                        <img alt="remove-item" 
+                             src="https://image.flaticon.com/icons/svg/1214/1214428.svg" 
+                             className="action-icons" 
+                             onClick = {()=>{this.props.handleDeleteItem(this.props.product)}}>
+                        </img>
 
                     </div>
                 </div>
