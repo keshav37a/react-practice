@@ -1,85 +1,50 @@
 import React from 'react';
 
-class CartItem extends React.Component{
-    // eslint-disable-next-line no-useless-constructor
-    constructor(){
-        super();
-        // this.state = {
-        //     title: 'Roasted Chicken',
-        //     price: 500,
-        //     quantity: 1,
-        //     img: ''
-        // }
-    }
+const CartItem = (props)=>
+{
+    const {title, price, quantity, img} = props.product;
+    const {
+        product,
+        onIncreaseQuantity,
+        onDecreaseQuantity,
+        onDeleteProduct
+    } = props;
 
-    // increaseQty = ()=>{
-    //     // Set state form 1
-    //     // this.setState({quantity: this.state.quantity+1}, ()=>{
-    //     //     console.log('state: ', this.state.quantity);
-    //     // });
+    return (
+        <div className="cart-item">
+            <div className="left-block">
+                <img alt="item-img" style={styles.image} src={product.img}></img>
+            </div>
+            <div className="right-block">
 
-        
-    //     // Set State form2- If PrevState Req use this
-    //     this.setState((prevState)=>{
-    //         return({
-    //             quantity: prevState.quantity+1
-    //         });
-    //     }, ()=>{
-    //         // console.log('state: ', this.state.quantity);
-    //     });
-        
-    // }
+                <div style={{fontSize : 25, fontWeight:600}}> {title} </div>
+                <div style={{color:'#777'}}>{price}</div>
+                <div style={{color:'#777'}}>Qty:{quantity} kg</div>
 
-    // decreaseQty = ()=>{
-    //     if(this.state.quantity<=1){
-    //         return;                    
-    //     }
-    //     else
-    //         this.setState({quantity: this.state.quantity-1}, ()=>{
-    //             // console.log('state: ', this.state.quantity);
-    //         });
-    // }
+                <div className="cart-item-actions">
 
-    render(){
-        // console.log(this.props);
-        const {title, price, quantity, img} = this.props.product;
-        return (
-            <div className="cart-item">
-                <div className="left-block">
-                    <img alt="item-img" style={styles.image}></img>
-                </div>
-                <div className="right-block">
+                    <img alt="increase-quantity" 
+                            src="https://image.flaticon.com/icons/svg/1828/1828926.svg" 
+                            className="action-icons" 
+                            onClick={()=>{onIncreaseQuantity(product)}} >
+                    </img>
 
-                    <div style={{fontSize : 25, fontWeight:600}}> {title} </div>
-                    <div style={{color:'#777'}}>{price}</div>
-                    <div style={{color:'#777'}}>Qty:{quantity} kg</div>
+                    <img alt="decrease-quantity" 
+                            src="https://image.flaticon.com/icons/svg/1828/1828906.svg" 
+                            className="action-icons" 
+                            onClick={()=>{onDecreaseQuantity(product)}} >
+                    </img>
 
-                    <div className="cart-item-actions">
+                    <img alt="remove-item" 
+                            src="https://image.flaticon.com/icons/svg/1214/1214428.svg" 
+                            className="action-icons" 
+                            onClick = {()=>{onDeleteProduct(product)}}>
+                    </img>
 
-                        <img alt="increase-quantity" 
-                             src="https://image.flaticon.com/icons/svg/1828/1828926.svg" 
-                             className="action-icons" 
-                             onClick={()=>{this.props.handleIncreaseQty(this.props.product)}} >
-                        </img>
-
-                        <img alt="decrease-quantity" 
-                             src="https://image.flaticon.com/icons/svg/1828/1828906.svg" 
-                             className="action-icons" 
-                             onClick={()=>{this.props.handleDecreaseQty(this.props.product)}} >
-                        </img>
-
-                        <img alt="remove-item" 
-                             src="https://image.flaticon.com/icons/svg/1214/1214428.svg" 
-                             className="action-icons" 
-                             onClick = {()=>{this.props.handleDeleteItem(this.props.product)}}>
-                        </img>
-
-                    </div>
                 </div>
             </div>
-
-        );
-    }
+        </div>
+    );
 }
 
 const styles = {
