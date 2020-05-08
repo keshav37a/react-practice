@@ -11,18 +11,19 @@ class App extends React.Component {
         products:[],
         loading: true
     }
+
+    this.db = firebase.firestore();
+
   }
 
   componentDidMount(){
-    firebase
-      .firestore()
+    this.db
       .collection('products')
-      .get()
-      .then((snapshot)=>{
+      .onSnapshot((snapshot)=>{
         // console.log(snapshot);
-        snapshot.docs.map((doc)=>{
-          // console.log(doc.data());
-        })
+        // snapshot.docs.map((doc)=>{
+        //   // console.log(doc.data());
+        // })
 
         const products = snapshot.docs.map((doc)=>{
           console.log(doc.data());
@@ -43,26 +44,29 @@ class App extends React.Component {
   } 
 
   handleIncreaseQuantity = (product)=>{
-    let {products} = this.state;
-    const index = products.indexOf(product);
-    products[index].qty +=1;
-    this.setState({
-        products: products
-    });
+    let id = product.id;
+    let docToBeUpdated = this.db
+        .collection('products')
+        .doc(id);
+
+    docToBeUpdated.update({qty: product.qty+1})
+                  .then(()=>{console.log('updated successfully');})
+                  .catch((err)=>{console.log('error in updating', err);}
+                  );    
   } 
 
   handleDecreaseQuantity = (product)=>{
-    let {products} = this.state;
-    const index = products.indexOf(product);
     if(product.qty<=1)
         return;
-    products[index].qty -=1;
+    let id = product.id;
+    let docToBeUpdated = this.db
+        .collection('products')
+        .doc(id);
 
-    // this.getCartCount();
-
-    this.setState({
-        products
-    });
+    docToBeUpdated.update({qty: product.qty-1})
+                  .then(()=>{console.log('updated successfully');})
+                  .catch((err)=>{console.log('error in updating', err);}
+                  );    
   }
 
   handleDeleteProduct = (product)=>{
@@ -95,12 +99,32 @@ class App extends React.Component {
     return totalAmount;
   }
 
+  addProduct = ()=>{
+
+    this.db
+        .collection('products')
+        .add({
+          title: 'Washing Machine',
+          qty: 1,
+          price: 15000,
+          img: ''
+        })
+        .then((docRef)=>{
+          console.log('successfully added product ', docRef);
+        })
+        .catch((err)=>{
+          console.log('error in adding product ', err);
+        })
+    
+  }
+
   
   render(){
     const {products, loading} = this.state;
     return(
       <div className="App">
         <Navbar count={this.getCartCount()}/>
+        <button onClick={this.addProduct} style={{padding: 15, fontSize: 15, margin: 15}}>Add a Product</button>
         {loading && <h1>Loading...</h1>}
           <Cart 
             products = {products}
@@ -115,7 +139,6 @@ class App extends React.Component {
     </div>
     );
   }
-
 }
 
 const styles = {
