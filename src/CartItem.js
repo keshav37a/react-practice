@@ -2,7 +2,7 @@ import React from 'react';
 
 const CartItem = (props)=>
 {
-    const {title, price, quantity, img} = props.product;
+    const {title, price, qty, img} = props.product;
     const {
         product,
         onIncreaseQuantity,
@@ -19,7 +19,7 @@ const CartItem = (props)=>
 
                 <div style={{fontSize : 25, fontWeight:600}}> {title} </div>
                 <div style={{color:'#777'}}>{price}</div>
-                <div style={{color:'#777'}}>Qty:{quantity} kg</div>
+                <div style={{color:'#777'}}>Quantity:{qty}</div>
 
                 <div className="cart-item-actions">
 
